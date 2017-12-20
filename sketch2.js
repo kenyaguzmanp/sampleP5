@@ -7,6 +7,7 @@ var radius;
 var theta;
 var x;
 var y;
+var particleSize= 48;
 
 function setup() {
   cnv = createCanvas(720, 400);
@@ -17,14 +18,15 @@ function setup() {
   r = height * 0.45;
   theta = 0;
 
-  cnv.mouseOver(overCanvas);
+  //cnv.mouseOver(overCanvas);
 }
 
 function draw() {
   //console.log("in draw");
   background(51);
   translate(width/2, height/2);
-
+    //x = 0;
+   // y=0;
   x = r * cos(theta);
   y = r * sin(theta);
   
@@ -34,7 +36,7 @@ function draw() {
   stroke(r, g, b);
   fill(r, g, b, 127);
   //line(0, 0, x, y);
-  ellipse(x, y, 48, 48);
+  ellipse(x, y, particleSize, particleSize);
   
   // Increase the angle over time
   theta += 0.02;
@@ -42,23 +44,33 @@ function draw() {
 
 // When the user clicks the mouse
 function mousePressed() {
-//    console.log("click"); 
-  // Check if mouse is inside the circle
-  var d = dist(mouseX, mouseY, x, y);
-  if (d < 10) {
-      console.log("inside");
-    // Pick new random color values
-    r = random(255);
-    g = random(255);
-    b = random(255);
-  }
+    console.log("Over Canvas");
+    console.log("x " + x + " y " + y);     
+      console.log("mouse coordinates: " + mouseX + " mouseY: " + mouseY);
+     
+     var xc = mouseX - width/2;
+     var yc = mouseY - height/2;
+     console.log("xc " + xc + " yc " + yc);
+     
+     var d = dist(x, y, xc, yc);
+     console.log("la distancia entre mouse y particula " + d);
+
+     if(d<particleSize/2){
+         console.log("inside");
+         theta = 0;
+         g = random(255);
+         b = random(255);
+     }
+     
+      
 }
 
 function overCanvas() {
     console.log("Over Canvas");
-    console.log("x " + x + " y " + y);     
-      // Pick new random color values
-     // r = random(255);
+    //console.log("x " + x + " y " + y);     
+     console.log("mouse coordinates: " + mouseX + " mouseY: " + mouseY);
+    var d = dist(mouseX, mouseY, x, y);
+    console.log("la distancia entre mouse y particula " + d);
      theta = 0;
     g = random(255);
     b = random(255);
