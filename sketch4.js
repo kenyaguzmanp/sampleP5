@@ -5,8 +5,9 @@
 var p;
 
 function setup() {
-  createCanvas(640,360);
+   cnv = createCanvas(640,360);
    p = new Particle(createVector(width/2, 20));
+   cnv.mouseOver(overCanvas);
 }
 
 function draw() {
@@ -14,7 +15,20 @@ function draw() {
 
   this.p.run();
   if (this.p.isDead()) {
+    console.log("Particle dead p ", this.p); 
     this.p = new Particle(createVector(width/2, 20));
-    //println("Particle dead!"); 
+    
   }
 }
+
+function mousePressed() {
+    // Check if mouse is inside the circle
+    console.log("mouse pressed!");
+    console.log("particle position: " , p.position);
+}
+
+function overCanvas() {
+    console.log("Over Canvas");
+    //p.display(5);
+    console.log("particle display:  " , p);
+  }

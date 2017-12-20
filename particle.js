@@ -14,8 +14,9 @@ var Particle = function(position) {
   
     this.run = function() {
       this.update();
-      this.display();
+      this.display(2);
     };
+
   
     // Method to update position
     this.update = function(){
@@ -25,9 +26,9 @@ var Particle = function(position) {
     };
   
     // Method to display
-    this.display = function() {
+    this.display = function(sw) {
       stroke(255, this.lifespan);
-      strokeWeight(2);
+      strokeWeight(sw);
       fill(127, this.lifespan);
       ellipse(this.position.x, this.position.y, 50, 50);
     };
