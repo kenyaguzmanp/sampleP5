@@ -8,5 +8,8 @@
     "start": "http-server -p 8080"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^0.10.0"
+  }
 }
