@@ -12,10 +12,9 @@ var particleSize= 48;
 function setup() {
   cnv = createCanvas(720, 400);
   // Pick colors randomly
-  r = random(255);
   g = random(255);
   b = random(255);
-  r = height * 0.45;
+  radius = height * 0.45;
   theta = 0;
 
   //cnv.mouseOver(overCanvas);
@@ -27,14 +26,14 @@ function draw() {
   translate(width/2, height/2);
     //x = 0;
    // y=0;
-  x = r * cos(theta);
-  y = r * sin(theta);
+  x = radius * cos(theta);
+  y = radius * sin(theta);
   
 // Draw the ellipse at the cartesian coordinate
   ellipseMode(CENTER);
   strokeWeight(2);
-  stroke(r, g, b);
-  fill(r, g, b, 127);
+  stroke(radius, g, b);
+  fill(radius, g, b, 127);
   //line(0, 0, x, y);
   ellipse(x, y, particleSize, particleSize);
   
@@ -57,12 +56,12 @@ function mousePressed() {
 
      if(d<particleSize/2){
          console.log("inside");
-         theta = 0;
+         //theta = 0;
          g = random(255);
          b = random(255);
+         radius=2*d;
      }
-     
-      
+          
 }
 
 function overCanvas() {
