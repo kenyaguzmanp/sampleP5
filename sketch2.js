@@ -4,9 +4,14 @@ var angle = 0;
 var aVelocity = 0;
 var aAcceleration = 0.0001;
 var radius;
+//angle of particle's movement
 var theta;
+//coordinates of particles
 var x;
 var y;
+//center of the particle
+var centerx = 0;
+var centery = 0;
 var particleSize = 48;
 var typeOfMovement = 'normal';
 
@@ -16,7 +21,7 @@ function setup() {
   g = random(255);
   b = random(255);
   //radius = height * 0.45;
-  radius = 10;
+  radius = height/4;
   theta = 0;
 
   cnv.mouseOver(overCanvas);
@@ -56,6 +61,15 @@ function mousePressed() {
   var d = dist(x, y, xc, yc);
   // console.log("la distancia entre mouse y particula " + d);
 
+  //put the center of particle in the pointer
+  centerx = xc;
+  centery= yc;
+  console.log("center: " + centerx + " centery: " + centery);
+  console.log("xc " + xc + " yc " + yc);
+  radius = 15;
+  console.log("radius: " + radius);
+
+
   if (d < particleSize / 2) {
     console.log("inside");
     //theta = 0;
@@ -63,17 +77,12 @@ function mousePressed() {
     b = random(255);
     radius = radius / d;
     if (typeOfMovement === 'normal') {
-      typeOfMovement = 'other';
+      //typeOfMovement = 'other';
     } else if (typeOfMovement === 'other') {
       typeOfMovement = 'normal';
     }
     move(typeOfMovement);
   }
-
-  // typeOfMovement = 'other';
-  // x = xc + radius * cos(theta);
-  //  y = yc + radius * sin(theta);
-  //theta= -10;
 
 }
 
@@ -97,18 +106,14 @@ function overCanvas() {
 function moveHandler(ev) {
   // Process the pointermove event
   console.log("moved");
-  var xd = mouseX;
-  var yd = mouseY;
-  //var d = dist(x, y, xd, yd);
-  //console.log("pointrcoordinates on document: " + mouseX + mouseY);
-  //radius = 200;
 }
 
 function move(typeOfMovement) {
   if (typeOfMovement === 'normal') {
-    radius = 100;
-    x = radius * cos(theta);
-    y = radius * sin(theta);
+   // radius = 100;
+   // console.log("cx: " + cx);
+    x = centerx + radius * cos(theta);
+    y = centery + radius * sin(theta);
 
   } else if (typeOfMovement === 'other') {
     x = 0;
