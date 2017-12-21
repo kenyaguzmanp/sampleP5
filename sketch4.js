@@ -7,17 +7,24 @@ var p;
 function setup() {
    cnv = createCanvas(640,360);
    p = new Particle(createVector(width/2, 20));
-   cnv.mouseOver(overCanvas);
+   //cnv.mouseOver(overCanvas);
 }
 
 function draw() {
   background(51);
 
   this.p.run();
+
+  if ((x > width) || (x < 0)) {
+    xspeed = xspeed * -1;
+  }
+  if ((y > height) || (y < 0)) {
+    yspeed = yspeed * -1;
+  }
+
   if (this.p.isDead()) {
     console.log("Particle dead p ", this.p); 
-    this.p = new Particle(createVector(width/2, 20));
-    
+    //this.p = new Particle(createVector(width/2, 20));
   }
 }
 

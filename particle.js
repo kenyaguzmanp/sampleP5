@@ -27,9 +27,9 @@ var Particle = function(position) {
   
     // Method to display
     this.display = function(sw) {
-      stroke(255, this.lifespan);
+      stroke(255);
       strokeWeight(sw);
-      fill(127, this.lifespan);
+      fill(127);
       ellipse(this.position.x, this.position.y, 50, 50);
     };
   
