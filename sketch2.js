@@ -8,27 +8,29 @@ var theta;
 var x;
 var y;
 var particleSize= 48;
+var typeOfMovement='normal';
 
 function setup() {
   cnv = createCanvas(720, 400);
   // Pick colors randomly
   g = random(255);
   b = random(255);
-  radius = height * 0.45;
+  //radius = height * 0.45;
+  radius = 10;
   theta = 0;
 
-  //cnv.mouseOver(overCanvas);
+  cnv.mouseOver(overCanvas);
+  document.onpointermove = moveHandler;
 }
-
 function draw() {
   //console.log("in draw");
   background(51);
   translate(width/2, height/2);
-    //x = 0;
+  //  x = 0;
    // y=0;
-  x = radius * cos(theta);
-  y = radius * sin(theta);
-  
+  //x = radius * cos(theta);
+ // y = radius * sin(theta);
+ move(typeOfMovement);
 // Draw the ellipse at the cartesian coordinate
   ellipseMode(CENTER);
   strokeWeight(2);
@@ -43,34 +45,75 @@ function draw() {
 
 // When the user clicks the mouse
 function mousePressed() {
-    console.log("Over Canvas");
-    console.log("x " + x + " y " + y);     
-      console.log("mouse coordinates: " + mouseX + " mouseY: " + mouseY);
+    console.log("pressedCanvas");
+  //  console.log("x " + x + " y " + y);     
+   //   console.log("mouse coordinates: " + mouseX + " mouseY: " + mouseY);
      
      var xc = mouseX - width/2;
      var yc = mouseY - height/2;
-     console.log("xc " + xc + " yc " + yc);
+   //  console.log("xc " + xc + " yc " + yc);
      
      var d = dist(x, y, xc, yc);
-     console.log("la distancia entre mouse y particula " + d);
+    // console.log("la distancia entre mouse y particula " + d);
 
      if(d<particleSize/2){
          console.log("inside");
          //theta = 0;
          g = random(255);
          b = random(255);
-         radius=2*d;
+         radius=radius/d;
      }
+     if(typeOfMovement === 'normal'){
+      typeOfMovement = 'other';
+      }else if(typeOfMovement === 'other'){
+      typeOfMovement = 'normal';
+      }     
+
+      //changeMove(typeOfMovement);
+      move(typeOfMovement);
+    // typeOfMovement = 'other';
+    // x = xc + radius * cos(theta);
+   //  y = yc + radius * sin(theta);
+    //theta= -10;
           
 }
 
 function overCanvas() {
     console.log("Over Canvas");
-    //console.log("x " + x + " y " + y);     
-     console.log("mouse coordinates: " + mouseX + " mouseY: " + mouseY);
-    var d = dist(mouseX, mouseY, x, y);
-    console.log("la distancia entre mouse y particula " + d);
-     theta = 0;
-    g = random(255);
-    b = random(255);
+     
+     var xc = mouseX - width/2;
+     var yc = mouseY - height/2;
+     
+     var d = dist(x, y, xc, yc);
+
+     if(d<particleSize/2){
+         console.log("inside");
+         //theta = 0;
+         g = random(255);
+         b = random(255);
+         radius=radius/d;
+     }
 }
+
+function moveHandler(ev) {
+  // Process the pointermove event
+  console.log("moved");
+  var xd = mouseX;
+  var yd = mouseY;
+  //var d = dist(x, y, xd, yd);
+  //console.log("pointrcoordinates on document: " + mouseX + mouseY);
+  //radius = 200;
+ }
+
+ function move(typeOfMovement){
+  if(typeOfMovement === 'normal'){
+    radius = 100;
+    x = radius * cos(theta);
+    y = radius * sin(theta);
+    
+  }else if(typeOfMovement === 'other'){
+    x = 0;
+    y=0;
+    theta = 0;
+  }
+ }
