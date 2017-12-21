@@ -74,7 +74,7 @@ function mousePressed() {
   //centery= yc + cySpeed;
 
   radius = 15;
-  
+
   if (typeOfMovement === 'normal') {
     typeOfMovement = 'other';
   } else if (typeOfMovement === 'other') {
@@ -138,8 +138,6 @@ function move(typeOfMovement) {
    // console.log("cx: " + cx);
    x = centerx + radius * cos(theta);
    y = centery + radius * sin(theta);
-   //x=0;
-   //y=0;
     theta += 0.02;
     
   } else if (typeOfMovement === 'other') {
